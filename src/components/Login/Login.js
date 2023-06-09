@@ -13,11 +13,19 @@ const Login = (props) => {
   const [collegeNameIsValid, setCollegeNameIsValid] = useState();
   const [formIsValid, setFormIsValid] = useState(false);
 
-  useEffect(()=>{
-    setFormIsValid(
-      enteredEmail.includes("@") && enteredPassword.trim().length > 6 && enteredCollegeName.trim().length >3
-    );
-  },[enteredEmail, enteredPassword, enteredCollegeName])
+  useEffect(() => {
+    const identifier = setTimeout(() => {
+      setFormIsValid(
+        enteredEmail.includes("@") &&
+          enteredPassword.trim().length > 6 &&
+          enteredCollegeName.trim().length > 3
+      );
+    }, 500);
+
+    return () => {
+      clearTimeout(identifier);
+    };
+  }, [enteredEmail, enteredPassword, enteredCollegeName]);
 
   const emailChangeHandler = (event) => {
     setEnteredEmail(event.target.value);
@@ -34,7 +42,7 @@ const Login = (props) => {
     //   event.target.value.trim().length > 6 && enteredEmail.includes("@") && enteredCollegeName.trim().length >3
     // );
   };
-  
+
   const collegeNameChangeHandler = (event) => {
     setEnteredCollegeName(event.target.value);
 
@@ -54,7 +62,6 @@ const Login = (props) => {
   const validateCollegeNameHandler = () => {
     setCollegeNameIsValid(enteredCollegeName.trim().length > 3);
   };
- 
 
   const submitHandler = (event) => {
     event.preventDefault();
