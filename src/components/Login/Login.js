@@ -52,7 +52,7 @@ const Login = (props) => {
   };
 
   const validateCollegeNameHandler = () => {
-    setCollegeNameIsValid(enteredCollegeName.trim().length > 1);
+    setCollegeNameIsValid(enteredCollegeName.trim().length > 3);
   };
  
 
